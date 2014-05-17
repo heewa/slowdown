@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 #include <sys/time.h>
 #include <signal.h>
 
@@ -79,7 +80,7 @@ int main(int argc, char** argv) {
     }
     pause_comp = (long int) (RAND_MAX * (1.0 - (double) pause_perc / 100.0));
 
-    srandomdev();
+    srandom(time(NULL));
 
     // Set up timing.
     timer_interval.it_interval.tv_sec = (int) TICK_FREQ_SEC;
