@@ -21,16 +21,25 @@ long int pause_comp = 0;
 int was_paused = 0;
 
 
+int failure_tolerance = 100;
+
+
 void interval(int signal) {
     int should_pause = random() < pause_comp;
 
     if (!was_paused && should_pause) {
         if (kill(pid, SIGTSTP) == 0) {
             was_paused = 1;
+        } else if (--failure_tolerance <= 0) {
+            fprintf(stderr, "Repeatedly failed to pause/unpause process.\n");
+            exit(2);
         }
     } else if (was_paused && !should_pause) {
         if (kill(pid, SIGCONT) == 0) {
             was_paused = 0;
+        } else if (--failure_tolerance <= 0) {
+            fprintf(stderr, "Repeatedly failed to pause/unpause process.\n");
+            exit(2);
         }
     }
 }
