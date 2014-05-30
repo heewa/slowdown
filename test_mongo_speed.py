@@ -151,12 +151,8 @@ def main():
     if not options.readonly:
         print 'Seeding collection with some records.'
         for i in xrange(1000):
-            Record['_id'] = {'a_real_id': ObjectId(),
-                             'a_num_cuz_we_so_fast': i}
             coll.insert(Record)
-
-        # Remove id so things work in the lazy way I wrote it down there.
-        del Record['_id']
+            del Record['_id']
 
     # Create & kick off threads.
     print 'Doing things and counting them.'
