@@ -1,3 +1,5 @@
+[ ![Codeship Status for heewa/slowdown](https://www.codeship.io/projects/15228710-4343-0132-296b-3a5cd741d01a/status)](https://www.codeship.io/projects/44629)
+
 slowdown
 ========
 
